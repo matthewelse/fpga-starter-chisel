@@ -1,0 +1,15 @@
+@(className: String, fields: Array[CppField])
+#include <cstdint>
+
+class @(className) {
+  public:
+    @(className) (void* base) : @for(field <- fields) {@(field.name)((@(field.typeName)*)(base + @(field.offset))), } base(base) {
+
+    }
+
+    @for(field <- fields) {volatile @(field.typeName) *const @(field.name);
+    }
+
+  private:
+    void* base;
+}
