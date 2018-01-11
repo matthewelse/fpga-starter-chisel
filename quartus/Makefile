@@ -1,5 +1,4 @@
+HPS/synthesis/HPS.qip: HPS.qsys
+	qsys-generate HPS.qsys --synthesis=verilog
 
-
-starter/synthesis/starter.qip: starter.qsys
-	qsys-generate starter.qsys --synthesis=verilog
 

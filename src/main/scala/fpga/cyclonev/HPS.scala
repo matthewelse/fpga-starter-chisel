@@ -9,7 +9,7 @@ class HPSClock extends Bundle {
 }
 
 class HPSReset extends Bundle {
-  val rst = Input(Bool())
+  val reset_n = Input(Bool())
 }
 
 class HPSEthernet extends Bundle {
@@ -27,21 +27,32 @@ class HPSEthernet extends Bundle {
   val RXD2 = Input(Bool())
   val RXD3 = Input(Bool())
 
-  val MDIO = Input(Bool())
+  val MDIO = Analog(1.W)
   val MDC = Output(Bool())
 }
 
 class HPSSDIO extends Bundle {
   val CMD = Analog(1.W)
-  val DATA = Analog(4.W)
+  val D0 = Analog(1.W)
+  val D1 = Analog(1.W)
+  val D2 = Analog(1.W)
+  val D3 = Analog(1.W)
   val CLK = Output(Clock())
 }
 
 class HPSUSB extends Bundle {
-  val CLK = Output(Clock())
-  val DATA = Analog(8.W)
+  val CLK = Input(Clock())
+  val D0 = Analog(1.W)
+  val D1 = Analog(1.W)
+  val D2 = Analog(1.W)
+  val D3 = Analog(1.W)
+  val D4 = Analog(1.W)
+  val D5 = Analog(1.W)
+  val D6 = Analog(1.W)
+  val D7 = Analog(1.W)
   val DIR = Input(Bool())
   val NXT = Input(Bool())
+  val STP = Output(Bool())
 }
 
 class HPSUART extends Bundle {
@@ -80,7 +91,7 @@ class HPS extends BlackBox {
     val clk = new HPSClock()
     val reset = new HPSReset()
 
-    val mem = new DDRMemory()
+    val memory = new DDRMemory()
     val hps_io_hps_io = new HPSIO()
   })
 }

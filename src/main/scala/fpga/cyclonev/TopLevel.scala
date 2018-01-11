@@ -24,14 +24,14 @@ class TopLevel(generateAccelerator: => Accelerator) extends RawModule {
 
   val hps = Module(new HPS())
 
-  hps.io.reset.rst := true.B
+  hps.io.reset.reset_n := true.B
   hps.io.clk.clk <> io.CLOCK_50
 
   hps.io.hps_io_hps_io.emac1_inst <> io.HPS_ENET
   hps.io.hps_io_hps_io.sdio_inst <> io.HPS_SD
   hps.io.hps_io_hps_io.uart0_inst <> io.HPS_UART
   hps.io.hps_io_hps_io.usb1_inst <> io.HPS_USB
-  hps.io.mem <> io.HPS_DDR3
+  hps.io.memory <> io.HPS_DDR3
 
   withClockAndReset(io.CLOCK_50, true.B) {
     val accelerator = Module(generateAccelerator)

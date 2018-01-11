@@ -3,7 +3,7 @@ db
 hps_isw_handoff
 incremental_db
 output_files
-starter
+HPS
 c5_pin_model_dump.txt
 hps_sdram_p0_summary.csv
 *.sopcinfo
