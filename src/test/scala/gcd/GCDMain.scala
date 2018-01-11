@@ -48,5 +48,5 @@ object GCDMain extends App {
   * }}}
   */
 object GCDMMTest extends App {
-  chisel3.Driver.execute(args, () => new MemoryMappedDevice(() => new GCD, 32))
+  chisel3.Driver.execute(args, () => new MemoryMappedDevice(new GCD, 32))
 }

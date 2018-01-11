@@ -10,5 +10,5 @@ import gcd.GCD
   * technique. Type help to see a list of commands.
   */
 object MemoryMappedRepl extends App {
-  iotesters.Driver.executeFirrtlRepl(args, () => new MemoryMappedDevice(() => new GCD, 32))
+  iotesters.Driver.executeFirrtlRepl(args, () => new MemoryMappedDevice(new GCD, 32))
 }

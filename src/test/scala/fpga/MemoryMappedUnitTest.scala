@@ -121,7 +121,7 @@ class MemoryMappedUnitTester(dut: MemoryMappedDevice) extends PeekPokeTester(dut
 class MemoryMappedTester extends ChiselFlatSpec {
   val wordSize = 32
 
-  Driver(() => new MemoryMappedDevice(() => new GCD, wordSize), "firrtl") {
+  Driver(() => new MemoryMappedDevice(new GCD, wordSize), "firrtl") {
     c => new MemoryMappedUnitTester(c)
   } should be (true)
 }

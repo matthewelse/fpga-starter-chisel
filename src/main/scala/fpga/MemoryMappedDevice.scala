@@ -6,9 +6,9 @@ import chisel3.experimental.DataMirror
 import chisel3.core.ActualDirection
 import chisel3.util.MuxLookup
 
-class MemoryMappedDevice(deviceGenerator: () => Module, memoryWidth: Int) extends Module {
+class MemoryMappedDevice(deviceGenerator: => Module, memoryWidth: Int) extends Module {
   val io = IO(new AvalonMaster)
-  val device = Module(deviceGenerator())
+  val device = Module(deviceGenerator)
 
   private def roundUp(value: Int, nearest: Int): Int = {
     if (value % nearest == 0) {
