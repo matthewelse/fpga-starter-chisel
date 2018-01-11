@@ -14,14 +14,14 @@ class MemoryMappedDevice(deviceGenerator: => Module, memoryWidth: Int) extends M
     if (value % nearest == 0) {
       value
     } else {
-      (((value + nearest) / nearest) * nearest)
+      ((value + nearest) / nearest) * nearest
     }
   }
 
   // Generate C++ code
-  val fields = new Array[CppField](device.io.elements.size)
-  var i: Int = 0
-  var offset: Int = 0 // in multiples of memoryWidth
+  private val fields = new Array[CppField](device.io.elements.size)
+  private var i = 0
+  private var offset = 0 // in multiples of memoryWidth
 
   for ((name, definition) <- device.io.elements) {
     // find nearest compatible c++ type
@@ -40,11 +40,12 @@ class MemoryMappedDevice(deviceGenerator: => Module, memoryWidth: Int) extends M
     i = i + 1
   }
 
-  val rendered = txt.MappedInterface(name, fields)
-  println(rendered)
+  val cpp_code = txt.MappedInterface(name, fields)
 
-  // This means that we need `offset` lots of `memoryWidth` registers to
-  // keep track of the state. 
+  // TODO: save to file
+  println(cpp_code)
+
+  // This means that we need `offset` lots of `memoryWidth` registers to keep track of the state.
   // TODO: only store values for inputs, we don't need to store outputs.
   val regs = Reg(Vec(offset / memoryWidth, UInt(memoryWidth.W)))
 
@@ -63,8 +64,8 @@ class MemoryMappedDevice(deviceGenerator: => Module, memoryWidth: Int) extends M
 
   // write data as appropriate
   when (io.ready) {
+    // TODO: check whether this is write_n or write
     when (!io.write_n) {
-      // TODO: check whether this is write_n or write
       regs(io.address(9, 2)) := io.write_data
     }
   }

@@ -1,5 +1,4 @@
 // See LICENSE for license details.
-
 package gcd
 
 import chisel3._
